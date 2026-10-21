@@ -48,7 +48,7 @@ jobs:
           --comment "GitHub Actions ERP backend deployment" \
           --parameters 'commands=[
             "set -eu",
-            "sudo -u ubuntu -H bash -lc '\"'\"'cd /var/www/erp-backend && git fetch origin main && git checkout main && git reset --hard origin/main && npm ci --omit=dev && pm2 restart erp-backend --update-env && sleep 3 && curl --fail --silent --show-error http://127.0.0.1:8000/health'\"'\"'"
+            "sudo -u ubuntu -H bash -lc \"cd /var/www/erp-backend && git fetch origin main && git checkout main && git reset --hard origin/main && npm ci --omit=dev && pm2 restart erp-backend --update-env && sleep 3 && curl --fail --silent --show-error http://127.0.0.1:8000/health\""
           ]' \
           --query 'Command.CommandId' \
           --output text)
