@@ -1,0 +1,36 @@
+# dependencies
+# /node_modules
+# /uploads
+# /dump
+# /logs
+# /.accounts
+# /config/uploads
+# application.log
+# constants.env
+
+
+
+
+# Dependencies
+node_modules/
+
+# Environment files and secrets
+constants.env
+.env
+.env.*
+!.env.example
+
+# Uploads and private documents
+/uploads/
+/dump/
+/logs/
+/.accounts/
+/config/uploads/
+
+# Logs
+application.log
+*.log
+
+# Local development files
+.DS_Store
+Thumbs.db

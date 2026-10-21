@@ -1,0 +1,41 @@
+const express = require("express");
+const router = express.Router();
+var generateDocumentController = require('../controllers/generateDocument');
+const checkPermission = require('../middleware/permission');
+
+router.get('/admin/generate-document-variables', generateDocumentController.generatedocumentvariables);
+router.get('/admin/get-generate-document', generateDocumentController.getgeneratedocument);
+router.get('/admin/get-project-templates', generateDocumentController.getProjectTemplates);
+router.get('/paymentCallback', generateDocumentController.paymentCallback);
+router.post('/paymentCallback', generateDocumentController.paymentCallback);
+router.get('/paymentForDocument', generateDocumentController.paymentForDocument);
+router.post('/posubmit', generateDocumentController.posubmit);
+router.get('/admin/get-generate-document-fees-bank', [checkPermission("Bank Statistic", "list")], generateDocumentController.getgeneratedocumentfees);
+router.get('/admin/get-generate-document-fees-law', [checkPermission("Law Statistic", "list")], generateDocumentController.getgeneratedocumentfees);
+router.get('/admin/get-generate-document-fees-drafter', [checkPermission("Drafter Statistic", "list")], generateDocumentController.getgeneratedocumentfees);
+router.get('/admin/get-generate-document-fees-project', [checkPermission("Project Statistic", "list")], generateDocumentController.getgeneratedocumentfees);
+
+
+router.get('/admin/get-generate-document-bank', [checkPermission("Bank Generated Document", "list")], generateDocumentController.getgeneratedocument);
+router.get('/admin/get-generate-document-drafter', [checkPermission("Drafter Generated Document", "list")], generateDocumentController.getgeneratedocument);
+router.get('/admin/get-generate-document-law', [checkPermission("Law Generated Document", "list")], generateDocumentController.getgeneratedocument);
+router.get('/admin/get-generate-document-project', [checkPermission("Project Generated Document", "list")], generateDocumentController.getgeneratedocument);
+router.post('/admin/generate-document-bank', [checkPermission("Bank Generated Document", "create")], generateDocumentController.generatedocument);
+router.post('/admin/generate-document-drafter', [checkPermission("Drafter Generated Document", "create")], generateDocumentController.generatedocument);
+router.post('/admin/generate-document-law', [checkPermission("Law Generated Document", "create")], generateDocumentController.generatedocument);
+router.post('/admin/generate-document-project', [checkPermission("Project Generated Document", "create")], generateDocumentController.generatedocument);
+router.post('/admin/key-documents-bank', [checkPermission("Bank Generated Document", "create")], generateDocumentController.keyDocuments);
+router.post('/admin/key-documents-drafter', [checkPermission("Drafter Generated Document", "create")], generateDocumentController.keyDocuments);
+router.post('/admin/key-documents-law', [checkPermission("Law Generated Document", "create")], generateDocumentController.keyDocuments);
+router.post('/admin/key-documents-project', [checkPermission("Project Generated Document", "create")], generateDocumentController.keyDocuments);
+router.post('/admin/update-generate-document-bank', [checkPermission("Bank Generated Document", "statusChange")], generateDocumentController.generatedocumentupdate);
+router.post('/admin/update-generate-document-drafter', [checkPermission("Drafter Generated Document", "statusChange")], generateDocumentController.generatedocumentupdate);
+router.post('/admin/delete-generate-document-bank', [checkPermission("Bank Generated Document", "delete")], generateDocumentController.deletegeneratedocument);
+router.post('/admin/delete-generate-document-drafter', [checkPermission("Drafter Generated Document", "delete")], generateDocumentController.deletegeneratedocument);
+router.post('/admin/delete-generate-document-law', [checkPermission("Law Generated Document", "delete")], generateDocumentController.deletegeneratedocument);
+router.post('/admin/delete-generate-document-project', [checkPermission("Project Generated Document", "delete")], generateDocumentController.deletegeneratedocument);
+router.get('/admin/generate-document-logs-bank', [checkPermission("Bank Generated Document", "logs")], generateDocumentController.getgeneratedocumentlogs);
+router.get('/admin/generate-document-logs-drafter', [checkPermission("Drafter Generated Document", "logs")], generateDocumentController.getgeneratedocumentlogs);
+router.get('/admin/generate-document-logs-law', [checkPermission("Law Generated Document", "logs")], generateDocumentController.getgeneratedocumentlogs);
+router.get('/admin/generate-document-logs-project', [checkPermission("Project Generated Document", "logs")], generateDocumentController.getgeneratedocumentlogs);
+module.exports = router; 
