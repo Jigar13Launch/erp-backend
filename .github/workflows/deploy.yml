@@ -1,4 +1,41 @@
 
+name: Deploy ERP Backend to EC2
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "README.md"
+      - "CLAUDE.md"
+      - ".gitignore"
+      - ".github/**"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: erp-backend-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy backend through AWS SSM
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ap-south-1
+
       - name: Deploy to EC2 through SSM
         env:
           INSTANCE_ID: i-0d1789306da10ae09
